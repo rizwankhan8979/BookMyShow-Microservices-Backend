@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details - Rizwan 2.0</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Razorpay Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <div class="checkout-wrapper">
+        <div class="checkout-container">
+            
+            <!-- Page Header -->
+            <header class="checkout-header">
+                <h1 class="title">Payment details</h1>
+                <p class="subtitle">Complete your purchase by providing your payment details.</p>
+            </header>
+
+            <!-- Checkout Form -->
+            <form id="paymentForm" onsubmit="handleFormSubmit(event)">
+                
+                <!-- Section 1: Billing Information -->
+                <div class="card billing-card">
+                    <h2 class="card-title">Billing information</h2>
+                    
+                    <div class="input-group-container">
+                        <!-- Full Name Input -->
+                        <div class="input-field">
+                            <input type="text" id="fullName" placeholder=" " required>
+                            <label for="fullName">Full Name</label>
+                        </div>
+                        
+                        <!-- Email Input -->
+                        <div class="input-field">
+                            <input type="email" id="email" placeholder=" " required>
+                            <label for="email">Email Address</label>
+                        </div>
+                        
+                        <!-- Phone Number Input with Country Code -->
+                        <div class="input-field phone-field">
+                            <div class="country-picker">
+                                <span class="flag">🇮🇳</span>
+                                <span class="code">+91</span>
+                                <i class="fa-solid fa-caret-down dropdown-icon"></i>
+                            </div>
+                            <input type="tel" id="phoneNumber" placeholder=" " maxlength="10" required>
+                            <label for="phoneNumber" class="phone-label">Phone Number</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Coupon Code -->
+                <div class="card coupon-card">
+                    <button type="button" class="coupon-header" id="couponToggle" onclick="toggleCouponAccordion()">
+                        <div class="coupon-title">
+                            <i class="fa-solid fa-certificate coupon-icon"></i>
+                            <span>Have a coupon?</span>
+                        </div>
+                        <i class="fa-solid fa-plus toggle-icon" id="toggleIcon"></i>
+                    </button>
+                    <div class="coupon-content" id="couponContent">
+                        <div class="coupon-input-wrapper">
+                            <input type="text" id="couponCode" placeholder="Enter coupon code (e.g. RIZWAN50)" uppercase>
+                            <button type="button" class="apply-coupon-btn" onclick="applyCoupon()">Apply</button>
+                        </div>
+                        <div class="coupon-message" id="couponMessage"></div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Service Ticket & Summary -->
+                <div class="card ticket-card">
+                    <div class="ticket-header-border"></div>
+                    
+                    <div class="ticket-body">
+                        <div class="service-detail-row">
+                            <div class="service-info">
+                                <span class="service-label">Service</span>
+                                <h3 class="course-name" id="courseName">Rizwan 2.0</h3>
+                            </div>
+                            <div class="price-info">
+                                <span class="original-price">₹14999</span>
+                                <span class="discounted-price" id="discountedPrice">₹2.00</span>
+                            </div>
+                        </div>
+
+                        <div class="dashed-divider"></div>
+
+                        <div class="amount-row">
+                            <span class="amount-label">Amount to be paid :</span>
+                            <span class="amount-value" id="finalAmount">₹2.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Submit / Proceed Button -->
+                <div class="action-container">
+                    <button type="submit" class="proceed-btn" id="proceedBtn">
+                        <span class="btn-text" id="btnText">Proceed to pay ₹2.00</span>
+                        <div class="btn-spinner" id="btnSpinner"></div>
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- Alert / Response Banner for API result testing -->
+            <div id="responseAlert" class="response-alert hidden"></div>
+
+        </div>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>
